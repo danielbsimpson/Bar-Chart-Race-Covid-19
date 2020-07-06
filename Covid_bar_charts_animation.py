@@ -2,7 +2,7 @@
 """
 Created on Sun Jul  5 15:48:12 2020
 
-@author: Damien
+@author: Daniel Simpson
 """
 
 import numpy as np
@@ -69,13 +69,18 @@ june_week4 = get_week(data, '2020-06-27')
 
 july_week1 = get_week(data, '2020-07-03')
 
-weeks_list = [jan_week, feb_week1, feb_week2, feb_week3, feb_week4, mar_week1, mar_week2, mar_week3, mar_week4, apr_week1, apr_week2, apr_week3, apr_week4, may_week1,
-             may_week2, may_week3, may_week4, may_week5, june_week1, june_week2, june_week3, june_week4,
-             july_week1]
-months_list = ['January', 'February', 'February', 'February', 'February', 'March', 'March', 'March', 'March', 'April', 'April', 'April', 'April', 'May',
-               'May', 'May', 'May', 'May', 'June', 'June', 'June', 'June', 'July']
+weeks_list = [jan_week, feb_week1, feb_week2, feb_week3, feb_week4, mar_week1,
+              mar_week2, mar_week3, mar_week4, apr_week1, apr_week2, 
+              apr_week3, apr_week4, may_week1, may_week2, may_week3, 
+              may_week4, may_week5, june_week1, june_week2, june_week3, 
+              june_week4, july_week1]
 
-def get_plot(week):
+months_list = ['January', 'February', 'February', 'February', 'February', 
+               'March', 'March', 'March', 'March', 'April', 'April', 'April', 
+               'April', 'May', 'May', 'May', 'May', 'May', 'June', 'June', 
+               'June', 'June', 'July']
+
+def get_plot(week, month):
     week = week[::-1]
     state_list = list(week.index.values)
     fig, ax = plt.subplots(figsize=(15, 8))
@@ -84,6 +89,7 @@ def get_plot(week):
     for i, (value, name) in enumerate(zip(week['cases'], state_list)):
         ax.text(value, i,     name,size=14, weight=600, ha='left', va='bottom')
         ax.text(value, i -.25, f'{value:,.0f}',  size=14, ha='right',  va='center')
+    
     ax.text(0, 1.12, 'Covid-19 total reported cases by state',
         transform=ax.transAxes, size=24, weight=600, ha='left')
     ax.xaxis.set_major_formatter(ticker.StrMethodFormatter('{x:,.0f}'))
@@ -92,17 +98,18 @@ def get_plot(week):
     ax.set_yticks([])
     ax.margins(0, 0.01)
     ax.grid(which='major', axis='x', linestyle='-')
-    #ax.text(1, 0.4, month, transform=ax.transAxes, size=46, ha='right')
+    ax.text(1, 0.4, month, transform=ax.transAxes, size=46, ha='right')
     ax.set_axisbelow(True)
 
+for i in range(0, len(weeks_list)):
+    get_plot(weeks_list[i], months_list[i])
 
+'''
 from matplotlib.animation import FuncAnimation 
-from IPython.display import HTML
-#plt.rcParams["animation.html"] = "jshtml"
 fig, ax = plt.subplots(figsize=(15, 8))
-MyAnimation = FuncAnimation(fig, get_plot, frames=weeks_list)
+MyAnimation = FuncAnimation(fig, get_plot, frames=weeks_months)
 
-MyAnimation.save('Animation.gif', writer='imagemagick')
+#MyAnimation.save('Animation.gif', writer='imagemagick')
 #HTML(MyAnimation.to_jshtml())
 #MyAnimation.to_html5_video()
-#MyAnimation.save('C:/Users/Damien/Desktop/Data Science Projects/Covid/MyAnimation.gif', writer='PillowWriter', fps=2)
+'''
