@@ -11,6 +11,8 @@
  The function get_plot() is used to design the bar charts for each week.
  
  **e.g.**
- ![alt text](https://github.com/danielbsimpson/Bar-Chart-Race-Covid-19/tree/master/Images%20Folder/Bar_Chart_Animation.gif?raw=true)
+
  
  A simple for loop goes through each week and produces a bar chart image which can be saved and stitched together to create the gif.
+ **Animated.gif file:**
+ ![alt text](https://github.com/danielbsimpson/Bar-Chart-Race-Covid-19/tree/master/Images%20Folder/Bar_Chart_Animation.gif?raw=true)
