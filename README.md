@@ -11,7 +11,7 @@
  The function get_plot() is used to design the bar charts for each week.
  
  **e.g.**
-![](Figure_1.png)
+![](Figure_23.png)
  
  A simple for loop goes through each week and produces a bar chart image which can be saved and stitched together to create the gif.
  
