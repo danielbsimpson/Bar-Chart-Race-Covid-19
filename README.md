@@ -14,5 +14,8 @@
 ![](Figure_1.png)
  
  A simple for loop goes through each week and produces a bar chart image which can be saved and stitched together to create the gif.
- **Animated.gif file:**
- ![](Bar_Chart_Animation.gif)
+ 
+ ![](Weekly_cases.gif)
+ 
+ ![](Weekly_deaths.gif)
+
