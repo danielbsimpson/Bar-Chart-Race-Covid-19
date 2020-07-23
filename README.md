@@ -18,5 +18,5 @@
  
  ![](Cases_BarChartRace.gif)
  
- ![](Deaths_BarChartRace.gif)
+ ![](Death_BarChartRace.gif)
 
