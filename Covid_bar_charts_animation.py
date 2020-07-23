@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 import matplotlib.animation as animation
 from IPython.display import HTML
 
-data = pd.read_csv(".../us-counties.csv")
+data = pd.read_csv("C:/Users/Damien/Desktop/Data Science/Data Science Projects/Covid/us_counties_covid19_daily.csv")
 data['date'] = pd.to_datetime(data['date'])
 data = data.drop(columns = ['fips', 'county'])
 data['month'] = data['date'].dt.strftime('%b')
@@ -20,9 +20,9 @@ data['month'] = data['date'].dt.strftime('%b')
 state_list = list(data['state'].unique())
 color_list = ['#7e1e9c', '#15b01a', '#0343df', '#ff81c0', '#653700', '#e50000',
               '#95d0fc', '#029386', '#f97306', '#96f97b', '#c20078', '#ffff14',
-              '#929591', '#89fe05', '#75bbfd', '#bf77f6', '#9a0eea', '#033500',
+              '#929591', '#89fe05', '#75bbfd', '#bf77f6', '#9a0eea', '#03719c',
               '#06c2ac', '#c79fef', '#00035b', '#d1b26f', '#00ffff', '#13eac9',
-              '#06470c', '#ae7181', '#ed0dd9', '#01ff07', '#650021', '#6e750e',
+              '#a9f971', '#ae7181', '#ed0dd9', '#01ff07', '#650021', '#6e750e',
               '#ff796c', '#e6daa6', '#0504aa', '#a2cffe', '#cea2fd', '#840000',
               '#ff028d', '#ad8150', '#c7fdb5', '#ffb07c', '#677a04', '#cb416b',
               '#8e82fe', '#53fca1', '#aaff32', '#380282', '#ceb301', '#ffd1df',
@@ -108,12 +108,16 @@ june_cases4['month'] = 'June'
 
 july_cases1 = get_week(data, '2020-07-03')[0]
 july_cases1['month'] = 'July'
+july_cases2 = get_week(data, '2020-07-10')[0]
+july_cases2['month'] = 'July'
+july_cases3 = get_week(data, '2020-07-17')[0]
+july_cases3['month'] = 'July'
 
 weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cases1,
               mar_cases2, mar_cases3, mar_cases4, apr_cases1, apr_cases2, 
               apr_cases3, apr_cases4, may_cases1, may_cases2, may_cases3, 
               may_cases4, may_cases5, june_cases1, june_cases2, june_cases3, 
-              june_cases4, july_cases1]
+              june_cases4, july_cases1, july_cases2, july_cases3]
 
 
 def cases_plot(week):
@@ -124,7 +128,7 @@ def cases_plot(week):
     ax.barh(state_list, week['cases'], color=[state_color[x] for x in state_list])
     for i, (value, name) in enumerate(zip(week['cases'], state_list)):
         ax.text(value, i,     name,size=18, weight=600, ha='left', va='bottom')
-        ax.text(value, i -.25, f'{value:,.0f}',  size=18, ha='right',  va='center')
+        ax.text(value, i -.25, f'{value:,.0f}',  size=14, ha='right',  va='center')
     
     ax.text(0, 1.12, 'Covid-19 total reported cases by state',
         transform=ax.transAxes, size=24, weight=600, ha='left')
@@ -181,12 +185,16 @@ june_deaths4['month'] = 'June'
 
 july_deaths1 = get_week(data, '2020-07-03')[1]
 july_deaths1['month'] = 'July'
+july_deaths2 = get_week(data, '2020-07-10')[1]
+july_deaths2['month'] = 'July'
+july_deaths3 = get_week(data, '2020-07-17')[1]
+july_deaths3['month'] = 'July'
 
 weeks_deaths = [feb_deaths4, mar_deaths1,
               mar_deaths2, mar_deaths3, mar_deaths4, apr_deaths1, apr_deaths2, 
               apr_deaths3, apr_deaths4, may_deaths1, may_deaths2, may_deaths3, 
               may_deaths4, may_deaths5, june_deaths1, june_deaths2, june_deaths3, 
-              june_deaths4, july_deaths1]
+              june_deaths4, july_deaths1, july_deaths2, july_deaths3]
 
 
 def deaths_plot(week):
@@ -197,7 +205,7 @@ def deaths_plot(week):
     ax.barh(state_list, week['deaths'], color=[state_color[x] for x in state_list])
     for i, (value, name) in enumerate(zip(week['deaths'], state_list)):
         ax.text(value, i,     name,size=18, weight=600, ha='left', va='bottom')
-        ax.text(value, i -.25, f'{value:,.0f}',  size=18, ha='right',  va='center')
+        ax.text(value, i -.25, f'{value:,.0f}',  size=14, ha='right',  va='center')
     
     ax.text(0, 1.12, 'Covid-19 total reported deaths by state',
         transform=ax.transAxes, size=24, weight=600, ha='left')
@@ -209,12 +217,12 @@ def deaths_plot(week):
     ax.grid(which='major', axis='x', linestyle='-')
     ax.text(1, 0.4, week['month'][0], transform=ax.transAxes, size=46, ha='right')
     ax.set_axisbelow(True)
-
-for i in range(0, len(weeks_list)):
-    cases_plot(weeks_list[i])
-    
-for i in range(0, len(weeks_deaths)):
-    deaths_plot(weeks_deaths[i])
+def create_cases_plots():
+    for i in range(0, len(weeks_list)):
+        cases_plot(weeks_list[i])
+def create_deaths_plots():    
+    for i in range(0, len(weeks_deaths)):
+        deaths_plot(weeks_deaths[i])
     
 
 
