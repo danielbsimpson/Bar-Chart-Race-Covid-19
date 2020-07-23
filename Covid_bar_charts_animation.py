@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 import matplotlib.animation as animation
 from IPython.display import HTML
 
-data = pd.read_csv("C:/Users/Damien/Desktop/Data Science/Data Science Projects/Covid/us_counties_covid19_daily.csv")
+data = pd.read_csv(".../us_counties_covid19_daily.csv")
 data['date'] = pd.to_datetime(data['date'])
 data = data.drop(columns = ['fips', 'county'])
 data['month'] = data['date'].dt.strftime('%b')
