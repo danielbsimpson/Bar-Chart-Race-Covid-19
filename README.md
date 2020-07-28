@@ -16,6 +16,6 @@
  
  A simple for loop goes through each week and produces a bar chart image which can be saved and stitched together to create the gif.
  
-![](Cases_BarChartRace.gif)
+![](Cases_Barchart_Race.gif)
 
-![](Deaths_BarChartRace.gif)
+![](Deaths_Barchart_Race.gif)
