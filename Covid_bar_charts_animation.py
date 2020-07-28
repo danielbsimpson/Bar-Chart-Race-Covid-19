@@ -12,11 +12,12 @@ import matplotlib.ticker as ticker
 import matplotlib.animation as animation
 from IPython.display import HTML
 
-data = pd.read_csv(".../us_counties_covid19_daily.csv")
+data = pd.read_csv("C:/Users/Damien/Desktop/Data Science/Data Science Projects/Covid/us-counties.csv")
 data['date'] = pd.to_datetime(data['date'])
 data = data.drop(columns = ['fips', 'county'])
 data['month'] = data['date'].dt.strftime('%b')
 
+#Assign a color for every state for use in matplotlib
 state_list = list(data['state'].unique())
 color_list = ['#7e1e9c', '#15b01a', '#0343df', '#ff81c0', '#653700', '#e50000',
               '#95d0fc', '#029386', '#f97306', '#96f97b', '#c20078', '#ffff14',
@@ -29,6 +30,7 @@ color_list = ['#7e1e9c', '#15b01a', '#0343df', '#ff81c0', '#653700', '#e50000',
               '#cf6275', '#0165fc']
 state_color = dict(zip(state_list, color_list))
 
+#Sum all the data up to the date specified
 def get_week(data, date):
     desired_week = data[data['date'] == date].groupby('state').agg({
         'cases':'sum','deaths':'sum'})
@@ -37,6 +39,7 @@ def get_week(data, date):
     
     return (cases_week, deaths_week)
 
+#Added in zero values to ensure Bar Chart is same length for every week
 jan_cases = get_week(data, '2020-01-31')[0]
 jan_cases.loc['Massachusetts'] = [0,0]
 jan_cases.loc['Wisconsin'] = [0,0]
@@ -112,14 +115,20 @@ july_cases2 = get_week(data, '2020-07-10')[0]
 july_cases2['month'] = 'July'
 july_cases3 = get_week(data, '2020-07-17')[0]
 july_cases3['month'] = 'July'
+july_cases4 = get_week(data, '2020-07-24')[0]
+july_cases4['month'] = 'July'
+july_cases5 = get_week(data, '2020-07-27')[0]
+july_cases5['month'] = 'July'
 
+#Place all the weeks into a list
 weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cases1,
               mar_cases2, mar_cases3, mar_cases4, apr_cases1, apr_cases2, 
               apr_cases3, apr_cases4, may_cases1, may_cases2, may_cases3, 
               may_cases4, may_cases5, june_cases1, june_cases2, june_cases3, 
-              june_cases4, july_cases1, july_cases2, july_cases3]
+              june_cases4, july_cases1, july_cases2, july_cases3, july_cases4,
+              july_cases5]
 
-
+#Plot for cases bar chart
 def cases_plot(week):
     week = week[::-1]
     state_list = list(week.index.values)
@@ -141,64 +150,10 @@ def cases_plot(week):
     ax.text(1, 0.4, week['month'][0], transform=ax.transAxes, size=46, ha='right')
     ax.set_axisbelow(True)
 
-feb_deaths4 = get_week(data, '2020-02-29')[1]
-feb_deaths4['month'] = 'February'
-
-mar_deaths1 = get_week(data, '2020-03-07')[1]
-mar_deaths1['month'] = 'March'
-mar_deaths2 = get_week(data, '2020-03-14')[1]
-mar_deaths2['month'] = 'March'
-mar_deaths3 = get_week(data, '2020-03-21')[1]
-mar_deaths3['month'] = 'March'
-mar_deaths4 = get_week(data, '2020-03-28')[1]
-mar_deaths4['month'] = 'March'
-
-
-apr_deaths1 = get_week(data, '2020-04-04')[1]
-apr_deaths1['month'] = 'April'
-apr_deaths2 = get_week(data, '2020-04-11')[1]
-apr_deaths2['month'] = 'April'
-apr_deaths3 = get_week(data, '2020-04-18')[1]
-apr_deaths3['month'] = 'April'
-apr_deaths4 = get_week(data, '2020-04-25')[1]
-apr_deaths4['month'] = 'April'
-
-may_deaths1 = get_week(data, '2020-05-02')[1]
-may_deaths1['month'] = 'May'
-may_deaths2 = get_week(data, '2020-05-09')[1]
-may_deaths2['month'] = 'May'
-may_deaths3 = get_week(data, '2020-05-16')[1]
-may_deaths3['month'] = 'May'
-may_deaths4 = get_week(data, '2020-05-23')[1]
-may_deaths4['month'] = 'May'
-may_deaths5 = get_week(data, '2020-05-30')[1]
-may_deaths5['month'] = 'May'
-
-june_deaths1 = get_week(data, '2020-06-06')[1]
-june_deaths1['month'] = 'June'
-june_deaths2 = get_week(data, '2020-06-13')[1]
-june_deaths2['month'] = 'June'
-june_deaths3 = get_week(data, '2020-06-20')[1]
-june_deaths3['month'] = 'June'
-june_deaths4 = get_week(data, '2020-06-27')[1]
-june_deaths4['month'] = 'June'
-
-july_deaths1 = get_week(data, '2020-07-03')[1]
-july_deaths1['month'] = 'July'
-july_deaths2 = get_week(data, '2020-07-10')[1]
-july_deaths2['month'] = 'July'
-july_deaths3 = get_week(data, '2020-07-17')[1]
-july_deaths3['month'] = 'July'
-
-weeks_deaths = [feb_deaths4, mar_deaths1,
-              mar_deaths2, mar_deaths3, mar_deaths4, apr_deaths1, apr_deaths2, 
-              apr_deaths3, apr_deaths4, may_deaths1, may_deaths2, may_deaths3, 
-              may_deaths4, may_deaths5, june_deaths1, june_deaths2, june_deaths3, 
-              june_deaths4, july_deaths1, july_deaths2, july_deaths3]
-
-
+#Plot for deaths bar chart
 def deaths_plot(week):
-    week = week[::-1]
+    week = week[['deaths', 'month']]
+    week = week.sort_values('deaths')
     state_list = list(week.index.values)
     fig, ax = plt.subplots(figsize=(15, 8))
 
@@ -217,15 +172,17 @@ def deaths_plot(week):
     ax.grid(which='major', axis='x', linestyle='-')
     ax.text(1, 0.4, week['month'][0], transform=ax.transAxes, size=46, ha='right')
     ax.set_axisbelow(True)
+    
+#Loop through all weeks to create multiple plots
 def create_cases_plots():
     for i in range(0, len(weeks_list)):
         cases_plot(weeks_list[i])
 def create_deaths_plots():    
-    for i in range(0, len(weeks_deaths)):
-        deaths_plot(weeks_deaths[i])
+    for i in range(0, len(weeks_list)):
+        deaths_plot(weeks_list[i])
     
 
-
+#Animationed version
 '''
 from matplotlib.animation import FuncAnimation 
 fig, ax = plt.subplots(figsize=(15, 8))
