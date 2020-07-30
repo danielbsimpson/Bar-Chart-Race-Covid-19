@@ -117,7 +117,7 @@ july_cases3 = get_week(data, '2020-07-17')[0]
 july_cases3['month'] = 'July'
 july_cases4 = get_week(data, '2020-07-24')[0]
 july_cases4['month'] = 'July'
-july_cases5 = get_week(data, '2020-07-27')[0]
+july_cases5 = get_week(data, '2020-07-29')[0]
 july_cases5['month'] = 'July'
 
 #Place all the weeks into a list
@@ -133,6 +133,7 @@ def cases_plot(week):
     week = week[::-1]
     state_list = list(week.index.values)
     fig, ax = plt.subplots(figsize=(15, 8))
+    plt.style.use('seaborn')
 
     ax.barh(state_list, week['cases'], color=[state_color[x] for x in state_list])
     for i, (value, name) in enumerate(zip(week['cases'], state_list)):
@@ -156,6 +157,7 @@ def deaths_plot(week):
     week = week.sort_values('deaths')
     state_list = list(week.index.values)
     fig, ax = plt.subplots(figsize=(15, 8))
+    plt.style.use('seaborn')
 
     ax.barh(state_list, week['deaths'], color=[state_color[x] for x in state_list])
     for i, (value, name) in enumerate(zip(week['deaths'], state_list)):
