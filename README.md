@@ -2,7 +2,7 @@
 ## Aim of the Project:
  The purpose of this project was to create a bar chart animated gif file which would track the number of overall diagnosed cases and deaths of Covid-19 for each state.
  The dataset was pulled off of Kaggle. The output is a series of bar charts, each bar chart containing the top 10 states with the highest confirmed cases of Covid-19 diagnoses.
- Data collection starts on the 31st of January and goes weekly until the 27th of July. (Updated 7/28/2020)
+ Data collection starts on the 31st of January and goes weekly until the 27th of July. (Updated 7/29/2020)
  
  ## Method:
  Pandas is used to collect the data from the csv file, and used for storage.
