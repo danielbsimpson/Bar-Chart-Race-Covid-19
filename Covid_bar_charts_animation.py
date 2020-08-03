@@ -117,8 +117,11 @@ july_cases3 = get_week(data, '2020-07-17')[0]
 july_cases3['month'] = 'July'
 july_cases4 = get_week(data, '2020-07-24')[0]
 july_cases4['month'] = 'July'
-july_cases5 = get_week(data, '2020-07-29')[0]
+july_cases5 = get_week(data, '2020-07-31')[0]
 july_cases5['month'] = 'July'
+
+aug_cases1 = get_week(data, '2020-08-02')[0]
+aug_cases1['month'] = 'August'
 
 #Place all the weeks into a list
 weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cases1,
@@ -126,7 +129,7 @@ weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cas
               apr_cases3, apr_cases4, may_cases1, may_cases2, may_cases3, 
               may_cases4, may_cases5, june_cases1, june_cases2, june_cases3, 
               june_cases4, july_cases1, july_cases2, july_cases3, july_cases4,
-              july_cases5]
+              july_cases5, aug_cases1]
 
 #Plot for cases bar chart
 def cases_plot(week):
