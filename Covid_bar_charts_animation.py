@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Jul  5 15:48:12 2020
-
 @author: Daniel Simpson
 """
 
@@ -120,8 +119,23 @@ july_cases4['month'] = 'July'
 july_cases5 = get_week(data, '2020-07-31')[0]
 july_cases5['month'] = 'July'
 
-aug_cases1 = get_week(data, '2020-08-02')[0]
+aug_cases1 = get_week(data, '2020-08-07')[0]
 aug_cases1['month'] = 'August'
+aug_cases2 = get_week(data, '2020-08-14')[0]
+aug_cases2['month'] = 'August'
+aug_cases3 = get_week(data, '2020-08-21')[0]
+aug_cases3['month'] = 'August'
+aug_cases4 = get_week(data, '2020-08-28')[0]
+aug_cases4['month'] = 'August'
+
+sep_cases1 = get_week(data, '2020-09-04')[0]
+sep_cases1['month'] = 'September'
+sep_cases2 = get_week(data, '2020-09-11')[0]
+sep_cases2['month'] = 'September'
+sep_cases3 = get_week(data, '2020-09-18')[0]
+sep_cases3['month'] = 'September'
+sep_cases4 = get_week(data, '2020-09-25')[0]
+sep_cases4['month'] = 'September'
 
 #Place all the weeks into a list
 weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cases1,
@@ -129,7 +143,8 @@ weeks_list = [jan_cases, feb_cases1, feb_cases2, feb_cases3, feb_cases4, mar_cas
               apr_cases3, apr_cases4, may_cases1, may_cases2, may_cases3, 
               may_cases4, may_cases5, june_cases1, june_cases2, june_cases3, 
               june_cases4, july_cases1, july_cases2, july_cases3, july_cases4,
-              july_cases5, aug_cases1]
+              july_cases5, aug_cases1, aug_cases2, aug_cases3, aug_cases4,
+              sep_cases1, sep_cases2, sep_cases3, sep_cases4]
 
 #Plot for cases bar chart
 def cases_plot(week):
@@ -192,7 +207,6 @@ def create_deaths_plots():
 from matplotlib.animation import FuncAnimation 
 fig, ax = plt.subplots(figsize=(15, 8))
 MyAnimation = FuncAnimation(fig, get_plot, frames=weeks_months)
-
 #MyAnimation.save('Animation.gif', writer='imagemagick')
 #HTML(MyAnimation.to_jshtml())
 #MyAnimation.to_html5_video()
